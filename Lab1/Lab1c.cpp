@@ -1,48 +1,46 @@
 #include "Lab1.h"
-//NONE OF THIS WORKS, DONT BOTHER GRADING IT... I just started learning C++ a week ago (im a transfer, I learned Python and Java)
 
 class value {
     private:
-        long unsigned int test;
+        long unsigned int lngUnsigInt;
         float flt;
         double dbl;
         char chr;
 
     public:
         //constructor
-        value(long unsigned int lngUnsigIntVal, float fltVal, double dblVal, char chrVal);
-            : test(lngUnsigIntVal), flt(fltVal), dbl(dblVal), chr(chrVal) {}
+        value(long unsigned int lngUnsigIntVal, float fltVal, double dblVal, char chrVal)
+            : lngUnsigInt(lngUnsigIntVal), flt(fltVal), dbl(dblVal), chr(chrVal) {
+                COUT << "-----------------------------" << ENDL;
+    		    COUT << "Initial address of 'this': " << this << ENDL << ENDL;
+            }
 
-        void printBase() {
-            COUT << "-----------------------------" << ENDL;
-		    COUT << "Initial address of 'this': " << this << ENDL << ENDL;
-            COUT << "this->flt" << ENDL;
+        //friend print
+        friend OST& operator<<(OST& out, const value& printVal) {
+
+            out << "Long Unsigned Int: " << printVal.lngUnsigInt << "\t at address " << &(printVal.lngUnsigInt) << ENDL;
+            out << "Float: " << printVal.flt << "\t\t at address " << &(printVal.flt) << ENDL;
+            out << "Double: " << printVal.dbl << "\t\t at address " << &(printVal.dbl) << ENDL;
+            out << "Character: " << printVal.chr << "\t\t at address " << (void*)&(printVal.chr) << ENDL;
+
+            return out;
         }
-
-        // //setMethods
-        // void setLngUnsigInt(long unsigned int lngUnsigInt);
-        // void setFloat(float flt);
-        // void setDouble(double dbl);
-        // void setChar(char chr);
-        //
-        // //getMethods
-        // long unsigned int getLngUnsigInt() const;
-        // float getFloat() const;
-        // double getDouble() const;
-        // char getChar() const;
-
-        // friend OST operator<<(OST output, const value& v);
 
 };
 int main() {
-    // long unsigned int a;
-    // float b;
-    // double c;
-    // char d;
-    // userInput(a, b, c, d);
+    long unsigned int a;
+    float b;
+    double c;
+    char d;
 
-    value value1(123, 124, 125, 'a');
+    //calling my function in the lab1.h file to retrieve values
+    userInput(a, b, c, d);
 
-    value1.printBase();
+    //passing the values into the constructor
+    value value1(a, b, c, d);
+
+    //out putting the ostream from the friend function
+    COUT << value1 << ENDL;
+
     return 0;
 }

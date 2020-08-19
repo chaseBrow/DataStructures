@@ -18,7 +18,9 @@ void printValues(void* reference) {
 }
 
 void setUserInput(void* reference, long unsigned int a, float b, double c, char d) {
+    //calling and dereferencing the data from its location
     *((long unsigned int *)(reference)) = a;
+    //and then moving the size of the printed out variable to locate the next data piece
     reference += sizeof(long unsigned int);
     *((float *)(reference)) = b;
     reference += sizeof(float);
@@ -28,19 +30,26 @@ void setUserInput(void* reference, long unsigned int a, float b, double c, char 
 }
 
 int main() {
+    //declaring the variables
     long unsigned int lngUnsigInt;
     float flt;
     double dbl;
     char chr;
 
+    //allocating a piece of memory to store my variables
     long unsigned int sizeOfNode = sizeof(long unsigned int) + sizeof(float)+ sizeof(double) + sizeof(char);
     void* node = malloc(sizeOfNode);
 
-
+    //calling a function from lab.h to retrieve values from the user
     userInput(lngUnsigInt, flt, dbl, chr);
+
+    //passing the values from the user and the void* of the start of our memory
     setUserInput(node, lngUnsigInt, flt, dbl, chr);
+
+    //calls a function to print our values by passing the starting address of our memory
     printValues(node);
 
+    //freeing the memory
     free(node);
     return 0;
 }
