@@ -49,8 +49,8 @@ Lab1c.o: Lab1c.cpp
 
 
 # Make all
-all: Lab1a Lab1b
+all: Lab1a Lab1b Lab1c
 
 # Make clean
 clean :
-	rm -rf *.o Lab1a Lab1b
+	rm -rf *.o Lab1a Lab1b Lab1c

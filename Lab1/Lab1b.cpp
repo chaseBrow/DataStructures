@@ -24,8 +24,13 @@ struct Value {
 };
 
 int main () {
+    //calling the constructor
     Value value(value.lngUnsigInt, value.flt, value.dbl, value.chr);
+
+    //calling a function from lab1.h to retrieve the values from the user and write them to the class object
     userInput(value.lngUnsigInt, value.flt, value.dbl, value.chr);
+
+    //calling the printValues function from the class Object
     value.printValues();
     return 0;
 }
