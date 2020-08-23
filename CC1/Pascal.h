@@ -13,6 +13,10 @@ int getTriangleSize();
 
 int** buildTriangle(int rows);
 
-int getLocation(int row, int col);
+void printTriangle(int** triangle, int rows);
+
+void printLocation(int** triangle);
+
+void deleteTriangle(int** triangle, int rows);
 
 #endif

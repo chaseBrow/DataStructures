@@ -4,11 +4,13 @@
 int main() {
     int size = getTriangleSize();
     COUT << "this is the size: " << size << ENDL;
-    buildTriangle(size);
+    int** triangle = buildTriangle(size);
 
+    printTriangle(triangle, size);
 
-    //build triangle
+    printLocation(triangle);
+
     //allow user to
-
+    deleteTriangle(triangle, size);
     return 0;
 }
