@@ -8,7 +8,7 @@
 #define ENDL std::endl
 #define CIN std::cin
 #define OST std::ostream //this was for trying to setup the friend in class for Lab1c
-//test
+
 int getTriangleSize();
 
 int** buildTriangle(int rows);

@@ -27,9 +27,25 @@ Fundamental.o: Fundamental.cpp
 Pascal.o: Pascal.cpp
 	$(PP) $(PQCXX) -c Pascal.cpp
 
+
+#Command: make Creative
+creativeObjs :=  creative.o
+creativePasObjs :=  creativePas.o
+
+creative: creative.o
+	$(PP) $(PQCXX) -o creative $(creativeObjs)
+	./creative
+
+creative.o: creative.cpp
+	$(PP) $(PQCXX) -c creative.cpp
+
+creativePas.o: creativePas.cpp
+	$(PP) $(PQCXX) -c creativePas.cpp
+
+
 # Make all
-all: Fundamental
+all: Fundamental creative
 
 # Make clean
 clean :
-	rm -rf *.o Fundamental Pascal
+	rm -rf *.o Fundamental Pascal creative creativePas

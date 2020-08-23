@@ -66,7 +66,7 @@ void printLocation(int** triangle, int rows) {
 
 void deleteTriangle(int** triangle, int rows) {
     for(int x = 0; x < rows; ++x) {
-        delete[] triangle[x];
+        free(triangle[x]);
     }
-    delete[] triangle;
+    free(triangle);
 }
