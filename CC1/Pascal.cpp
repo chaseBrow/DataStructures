@@ -2,7 +2,7 @@
 
 int getTriangleSize() {
     int size;
-    COUT << "How many rows do you want to calculate?" <<ENDL;
+    COUT << "How many rows do you want to calculate?";
     CIN >> size;
     return size;
 }
@@ -36,14 +36,23 @@ void printTriangle(int** triangle, int rows) {
     }
 }
 
-void printLocation(int** triangle) {
+void printLocation(int** triangle, int rows) {
     bool get = true;
     do {
         char chr;
         int x, y;
         COUT << "Enter a row and a column value to print: ";
         CIN >> x >> y;
-        COUT << triangle[x-1][y-1] << ENDL;
+
+        if (0 >= x || x >= rows + 1) {
+            COUT << x <<" is not a valid row." << ENDL;
+        }
+        else if (0 >= y || y >= x + 1) {
+            COUT << y << " is not a valid column in row " << x << ENDL;
+        }
+        else {
+            COUT << triangle[x-1][y-1] << ENDL;
+        }
         COUT << "continue? [y/n]: ";
         CIN >> chr;
         if(chr == 'y') get = true;
