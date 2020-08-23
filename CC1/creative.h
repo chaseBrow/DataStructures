@@ -9,9 +9,6 @@
 #define COUT std::cout
 #define ENDL std::endl
 #define CIN std::cin
-#define LIST std::list
-#define STR std::string
-#define OST std::ostream //this was for trying to setup the friend in class for Lab1c
 
 class Pizza {
     private:
@@ -25,19 +22,15 @@ class Pizza {
         int** toppingTri;
 
     public:
+
         Pizza(int crustsVal, int saucesVal, int cheesesVal, int toppingsVal);
-            // : crusts(crustsVal), sauces(saucesVal), cheeses(cheesesVal), toppings(toppingsVal) {}
+
+        int printCombination(int chs, int top);
+
+        void deleteTriangles();
 
 };
 
-// int getTriangleSize();
-
 int** buildTriangle(int rows);
-
-void printTriangle(int** triangle, int rows);
-
-void printLocation(int** triangle);
-
-void deleteTriangle(int** triangle, int rows);
 
 #endif

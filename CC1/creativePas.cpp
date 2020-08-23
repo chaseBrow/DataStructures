@@ -2,15 +2,32 @@
 
 Pizza::Pizza(int crustsVal, int saucesVal, int cheesesVal, int toppingsVal)
     : crusts(crustsVal), sauces(saucesVal), cheeses(cheesesVal), toppings(toppingsVal),
-    crustTri(buildTriangle(crustsVal)), sauceTri(buildTriangle(saucesVal)), cheeseTri(buildTriangle(cheesesVal)),
-    toppingTri(buildTriangle(toppingsVal)) {}
+    crustTri(buildTriangle(crustsVal + 1)), sauceTri(buildTriangle(saucesVal + 1)), cheeseTri(buildTriangle(cheesesVal + 1)),
+    toppingTri(buildTriangle(toppingsVal + 1)) {}
 
-// int getTriangleSize() {
-//     int size;
-//     COUT << "How many rows do you want to calculate?";
-//     CIN >> size;
-//     return size;
-// }
+int Pizza::printCombination(int chs, int top) {
+    if (0 >= chs || chs >= this->cheeses + 1) {
+        return 0;
+    }
+    else if (0 >= top || top >= this->toppings + 1) {
+        return 0;
+    }
+    else {
+    int chsComb = this->cheeseTri[cheeses][chs];
+    int topComb = this->toppingTri[toppings][top];
+
+    int comb = chsComb * topComb * crusts * sauces;
+    return comb;
+    }
+
+}
+
+void Pizza::deleteTriangles() {
+    for(int x = 0; x < rows; ++x) {
+        delete[] triangle[x];
+    }
+    delete[] triangle;
+}
 
 int** buildTriangle(int rows) {
     long unsigned int sizeOfTri = rows * sizeof(int*);
@@ -31,47 +48,3 @@ int** buildTriangle(int rows) {
     }
     return triangle;
 }
-
-// void printTriangle(int** triangle, int rows) {
-//     for(int x = 0; x < rows; x++) {
-//         for(int y = 0; y <= x; y++) {
-//             COUT << triangle[x][y] << "  ";
-//         }
-//         COUT << ENDL;
-//     }
-// }
-//
-// void printLocation(int** triangle, int rows) {
-//     bool get = true;
-//     do {
-//         char chr;
-//         int x, y;
-//         COUT << "Enter a row and a column value to print: ";
-//         CIN >> x >> y;
-//
-//         if (0 >= x || x >= rows + 1) {
-//             COUT << x <<" is not a valid row." << ENDL;
-//         }
-//         else if (0 >= y || y >= x + 1) {
-//             COUT << y << " is not a valid column in row " << x << ENDL;
-//         }
-//         else {
-//             COUT << triangle[x-1][y-1] << ENDL;
-//         }
-//         COUT << "continue? [y/n]: ";
-//         CIN >> chr;
-//         if(chr == 'y') get = true;
-//         else if(chr == 'n') get = false;
-//         else {
-//             COUT << "Invalid character input." << ENDL;
-//             return;
-//         }
-//     } while(get);
-// }
-//
-// void deleteTriangle(int** triangle, int rows) {
-//     for(int x = 0; x < rows; ++x) {
-//         delete[] triangle[x];
-//     }
-//     delete[] triangle;
-// }
