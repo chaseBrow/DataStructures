@@ -15,29 +15,21 @@ PQCXX    := -m64 -std=c++11 -Weffc++ $(PQCFLAGS)
 
 # Command: make Fundamentals
 FundamentalObjs :=  Fundamental.o
+PascalObjs :=  Pascal.o
 
 Fundamental: Fundamental.o
-	$(PP) $(CXXFLAGS) -o Fundamental $(FundamentalObjs)
+	$(PP) $(PQCXX) -o Fundamental $(FundamentalObjs)
 	./Fundamental
 
 Fundamental.o: Fundamental.cpp
-	$(PP) $(CXXFLAGS) -c Fundamental.cpp
+	$(PP) $(PQCXX) -c Fundamental.cpp
 
-
-# Command: make Creative
-Lab1bObjs :=  Lab1b.o
-
-Lab1b: Lab1b.o
-	$(PP) $(PQCFLAGS) -o Lab1b $(Lab1bObjs)
-	./Lab1b
-
-Lab1b.o: Lab1b.cpp
-	$(PP) $(PQCFLAGS) -c Lab1b.cpp
-
+Pascal.o: Pascal.cpp
+	$(PP) $(PQCXX) -c Pascal.cpp
 
 # Make all
 all: Fundamental
 
 # Make clean
 clean :
-	rm -rf *.o Fundamental
+	rm -rf *.o Fundamental Pascal

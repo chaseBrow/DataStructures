@@ -1,5 +1,5 @@
-#ifndef LAB1_H
-#define LAB1_H
+#ifndef PASCAL_H
+#define PASCAL_H
 
 #include <iostream> /*C++ version of stdio.h*/
 #include <cstdlib> /* Equivalent of stdlib.h */
@@ -11,7 +11,7 @@
 //test
 int getTriangleSize();
 
-int * buildTriangle(int rows);
+int** buildTriangle(int rows);
 
 int getLocation(int row, int col);
 
