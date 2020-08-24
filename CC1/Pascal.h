@@ -1,3 +1,5 @@
+// Author: Chase Brown
+// E-mail: cbrown54@nd.edu
 #ifndef PASCAL_H
 #define PASCAL_H
 
@@ -7,16 +9,20 @@
 #define COUT std::cout
 #define ENDL std::endl
 #define CIN std::cin
-#define OST std::ostream //this was for trying to setup the friend in class for Lab1c
 
+//getting the size of the triangle from the user
 int getTriangleSize();
 
+//allocating memory and building the triangle
 int** buildTriangle(int rows);
 
+//prints the entire triangle
 void printTriangle(int** triangle, int rows);
 
+//asks the user for a specific location and prints it
 void printLocation(int** triangle);
 
+//freeing the memory of the triangle
 void deleteTriangle(int** triangle, int rows);
 
 #endif
