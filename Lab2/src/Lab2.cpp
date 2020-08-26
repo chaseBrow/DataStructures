@@ -1,3 +1,6 @@
+//Author: Chase Brown
+//Email: cbrown54@nd.edu
+
 #include "../include/functions.h"
 
 int main() {
