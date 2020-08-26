@@ -1,5 +1,5 @@
-# Author: Matthew Morrison
-# E-mail: matt.morrison@nd.edu
+# Author: Chase Brown
+# E-mail: cbrown54@nd.edu
 #
 # This is the Makefile for the CSE 20312 - Lab 02
 
