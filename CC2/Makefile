@@ -39,6 +39,29 @@ $(OBJ)/Quick.o: $(SRC)/Fundamental.cpp $(INC)/Quick.h
 	$(PP) $(CXXFLAGS) -c $(SRC)/Fundamental.cpp -o $@
 
 
+# Command: make Creative
+CreativeObjs := $(OBJ)/Creative.o
+
+Creativecpp: $(FundamentalObjs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/Creative$(CreativeObjs)
+	$(EXE)/./Creative
+
+$(OBJ)/Creative.o: $(SRC)/Creative.cpp
+	$(PP) $(CXXFLAGS) -c $(SRC)/Creative.cpp -o $@
+
+
+# Command: make Creative
+QuickCreativeObjs := $(OBJ)/QuickCreative.o
+
+Creative: $(QuickCreativeObjs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/QuickCreative $(QuickCreativeObjs)
+	$(EXE)/./QuickCreative
+
+$(OBJ)/QuickCreative.o: $(SRC)/Creative.cpp $(INC)/QuickCreative.h
+	$(PP) $(CXXFLAGS) -c $(SRC)/Creative.cpp -o $@
+
+
+
 # make initialize
 # Will be called by grader to initialize your objects and executables folders
 
