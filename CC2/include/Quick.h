@@ -20,46 +20,40 @@
 
 //this function is used for printing out the array
 template<class Type>
-int partition(VECT<Type> theVect, int left, int right) {
+int partition(VECT<Type> & theVect, int left, int right) {
     int low = theVect[left];
     left++;
-    while(left != right) {
-        if (theVect[left] <= theVect[low]) {
+    while(left <= right) {
+        while(theVect[left] < theVect[low]) {
             left++;
         }
-        else {
-            while((left != right) && (theVect[low] < theVect[right])) {
-                right--;
-            }
+        while(theVect[right] > theVect[low]) {
+            right--;
+        }
+        if(left <= right) {
             SWAP(theVect[left], theVect[right]);
+            left++;
+            right++;
         }
     }
-    if(theVect[left] > theVect[low]) {
-        left--;
-    }
-    SWAP(theVect[low], theVect[left]);
     return left;
 }
 
 template<class Type>
-void print(VECT<Type> theVect) {
+void print(VECT<Type> & theVect) {
     for (int i = 0; i < theVect.size(); i++) {
-        COUT << theVect.at(i);
+        COUT << theVect.at(i) << ", ";
     }
     COUT << ENDL;
 }
 
 template<class Type>
 void quickSort(VECT<Type> & theVect, int left, int right) {
-    COUT << "unsorted: ";
-    print(theVect);
     if (left < right) {
         int part = partition(theVect, left, right);
         quickSort(theVect, left, part - 1);
         quickSort(theVect, part + 1, right);
     }
-    COUT << "sorted: ";
-    print(theVect);
 }
 
 #endif

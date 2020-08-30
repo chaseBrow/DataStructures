@@ -27,7 +27,12 @@ int main() {
     for(unsigned int i = 0; i < 15; i++) {
         random.push_back(rand() % 100);
     }
-    quickSort(random, 0, static_cast<int>(random.size()));
+    COUT << "unsorted: ";
+    print(random);
+    quickSort(random, 0, static_cast<int>(random.size() - 1));
+    COUT << "sorted: ";
+    print(random);
+
     // print(random);
     // print(randomSorted);
     //
