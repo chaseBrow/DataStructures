@@ -43,11 +43,20 @@ int partition(VECT<Type> theVect, int left, int right) {
 
 template<class Type>
 void quickSort(VECT<Type> & theVect, int left, int right) {
+    COUT << "unsorted: ";
+    print(theVect);
     if (left < right) {
         int part = partition(theVect, left, right);
         quickSort(theVect, left, part - 1);
         quickSort(theVect, part + 1, right);
     }
+    COUT << "sorted: ";
+    print(theVect);
+}
+
+template<class Type>
+void print(VECT<Type> theVect) {
+    
 }
 
 #endif

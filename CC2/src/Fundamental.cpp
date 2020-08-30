@@ -25,7 +25,7 @@ int main() {
     VECT<unsigned int> random;
     srand((unsigned int)time(NULL));
     for(unsigned int i = 0; i < 15; i++) {
-        random.push_back(rand() % 250);
+        random.push_back(rand() % 100);
     }
     quickSort(random, 0, static_cast<int>(random.size()));
     // print(random);
