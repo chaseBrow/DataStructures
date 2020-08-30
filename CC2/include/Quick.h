@@ -28,7 +28,6 @@ void print(VECT<Type> & theVect) {
 template<class Type>
 int partition(VECT<Type> & theVect, int left, int right) {
     int low = left;
-    left++;
     while(left <= right) {
         while(theVect.at(left) < theVect.at(low)) {
             left++;
@@ -39,10 +38,9 @@ int partition(VECT<Type> & theVect, int left, int right) {
         if(left <= right) {
             SWAP(theVect.at(left), theVect.at(right));
             left++;
-            right++;
+            right--;
         }
     }
-    print(theVect);
     return left;
 }
 
@@ -51,7 +49,7 @@ void quickSort(VECT<Type> & theVect, int left, int right) {
     if (left < right) {
         int part = partition(theVect, left, right);
         quickSort(theVect, left, part - 1);
-        quickSort(theVect, part + 1, right);
+        quickSort(theVect, part, right);
     }
 }
 
