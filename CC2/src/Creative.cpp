@@ -27,7 +27,10 @@ int main() {
     COUT << "---------------------------------------------------------" << ENDL;
     COUT << "Second Test: Pre Sorted Deck of Cards" << ENDL;
     VECT<unsigned int> sorted;
-    sorted.assign(deck, deck + 52);
+    int deck3[] = {313,312,311,310,309,308,307,306,305,304,303,302,301,213,212,
+                    211,210,209,208,207,206,205,204,203,202,201,113,112,111,110,
+                    109,108,107,106,105,104,103,102,101,13,12,11,10,9,8,7,6,5,4,3,2,1};
+    sorted.assign(deck3, deck3 + 52);
     COUT << "unsorted: ";
     print(sorted);
     quickSort(sorted, 0, static_cast<int>(sorted.size() - 1));

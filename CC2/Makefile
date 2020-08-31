@@ -20,7 +20,7 @@ EXE := exe
 # Command: make Fundamental
 FundamentalObjs := $(OBJ)/Fundamental.o
 
-Fundamental: $(FundamentalObjs)
+Quick: $(FundamentalObjs)
 	$(PP) $(CXXFLAGS) -o $(EXE)/Fundamental$(FundamentalObjs)
 	$(EXE)/./Fundamental
 
@@ -31,7 +31,7 @@ $(OBJ)/Fundamental.o: $(SRC)/Fundamental.cpp
 # Command: make Quick
 QuickObjs := $(OBJ)/Quick.o
 
-Quick: $(QuickObjs)
+Fundamental: $(QuickObjs)
 	$(PP) $(CXXFLAGS) -o $(EXE)/Quick $(QuickObjs)
 	$(EXE)/./Quick
 
