@@ -17,7 +17,7 @@ int main() {
     COUT << "First Test: Shuffled Deck of Cards" << ENDL;
     VECT<unsigned int> shuff;
     shuff.assign(deck, deck + 52);
-    RAND(shuff.begin(), shuff.end());
+    RAND(shuff.begin(), shuff.end()); //shuffling the deck of cards
     COUT << "unsorted: ";
     print(shuff);
     quickSort(shuff, 0, static_cast<int>(shuff.size() - 1));
@@ -55,7 +55,7 @@ int main() {
     COUT << "Lets find out which card it is." << ENDL;
     VECT<unsigned int> missing;
     srand((unsigned int)time(NULL));
-    int remove = rand() % 52;
+    int remove = rand() % 52; //picking a random card to remove
     deck[remove-1] = 0;
     missing.assign(deck, deck + 52);
     COUT << "unsorted: ";
@@ -64,25 +64,6 @@ int main() {
     COUT << "sorted: ";
     print(missing);
     findCard(missing);
-
-
-
-    //
-    // COUT << "---------------------------------------------------------" << ENDL;
-    // COUT << "Fourth Test: Strings" << ENDL;
-    // VECT<STR> strings;
-    // strings.push_back("Hello");
-    // strings.push_back("my");
-    // strings.push_back("name");
-    // strings.push_back("is");
-    // strings.push_back("is Chase");
-    // strings.push_back("Chase");
-    // strings.push_back("Chase Brown");
-    // COUT << "unsorted: ";
-    // print(strings);
-    // quickSort(strings, 0, static_cast<int>(strings.size() - 1));
-    // COUT << "sorted: ";
-    // print(strings);
 
     return 0;
 }
