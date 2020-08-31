@@ -1,57 +1,88 @@
 //Author: Chase Brown
 //Email: cbrown54@nd.edu
 
-#include "../include/Quick.h"
+#include "../include/QuickCreative.h"
 
 int main() {
-    COUT << "---------------------------------------------------------" << ENDL;
-    COUT << "First Test: Empty Array" << ENDL;
-    VECT<int> empty;
-    COUT << "unsorted: ";
-    print(empty);
-    quickSort(empty, 0, static_cast<int>(empty.size() - 1));
-    COUT << "sorted: ";
-    print(empty);
+    COUT << "Lets take a look at sorting a deck of cards with Quick Sort." << ENDL;
+    COUT << "We will assume an Ace = 1, Jack = 11, Queen = 12, and King = 13." << ENDL;
+    COUT << "0xx = diamonds, 1xx = clubs, 2xx = hearts, and 3xx = spades." << ENDL;
+    int deck[]= {1,2,3,4,5,6,7,8,9,10,11,12,13,101,102,103,
+                    104,105,106,107,108,109,110,111,112,113,201,202,203,204,205,
+                    206,207,208,209,210,211,212,213,301,302,303,304,305,306,307,308,
+                    309,310,311,312,313
+                };
 
     COUT << "---------------------------------------------------------" << ENDL;
-    COUT << "Second Test: Characters" << ENDL;
-    VECT<char> chars;
-    int a[] = {'T', 'H', 'E', 'C', 'O', 'R', 'O', 'N', 'A', 'V', 'I', 'R', 'U', 'S', 'S', 'U', 'C', 'K', 'S'};
-    chars.assign(a, a + 19);
+    COUT << "First Test: Shuffled Deck of Cards" << ENDL;
+    VECT<unsigned int> shuff;
+    shuff.assign(deck, deck + 52);
+    RAND(shuff.begin(), shuff.end());
     COUT << "unsorted: ";
-    print(chars);
-    quickSort(chars, 0, static_cast<int>(chars.size() - 1));
+    print(shuff);
+    quickSort(shuff, 0, static_cast<int>(shuff.size() - 1));
     COUT << "sorted: ";
-    print(chars);
+    print(shuff);
 
     COUT << "---------------------------------------------------------" << ENDL;
-    COUT << "Third Test: Random 15 Integers" << ENDL;
-    VECT<unsigned int> random;
+    COUT << "Second Test: Pre Sorted Deck of Cards" << ENDL;
+    VECT<unsigned int> sorted;
+    sorted.assign(deck, deck + 52);
+    COUT << "unsorted: ";
+    print(sorted);
+    quickSort(sorted, 0, static_cast<int>(sorted.size() - 1));
+    COUT << "sorted: ";
+    print(sorted);
+
+    COUT << "---------------------------------------------------------" << ENDL;
+    COUT << "Third Test: One Card out of place (212)" << ENDL;
+    VECT<unsigned int> close;
+    int deck2[]= {1,2,3,4,5,6,7,8,9,10,11,12,13,101,102,103,
+                    104,105,106,107,108,109,110,111,112,113,201,202,203,204,205,
+                    206,207,208,209,210,211,213,301,302,303,304,305,306,307,308,
+                    309,310,311,312,313,212
+                };
+    close.assign(deck2, deck2 + 52);
+    COUT << "unsorted: ";
+    print(close);
+    quickSort(close, 0, static_cast<int>(close.size() - 1));
+    COUT << "sorted: ";
+    print(close);
+
+    COUT << "---------------------------------------------------------" << ENDL;
+    COUT << "Fourth Test: Find the missing card" << ENDL;
+    COUT << "A random card is chosen and removed from the deck..." << ENDL;
+    COUT << "Lets find out which card it is." << ENDL;
+    VECT<unsigned int> missing;
     srand((unsigned int)time(NULL));
-    for(unsigned int i = 0; i < 15; i++) {
-        random.push_back(rand() % 100);
-    }
+    int remove = rand() % 52;
+    deck[remove-1] = 0;
+    missing.assign(deck, deck + 52);
     COUT << "unsorted: ";
-    print(random);
-    quickSort(random, 0, static_cast<int>(random.size() - 1));
+    print(missing);
+    quickSort(missing, 0, static_cast<int>(missing.size() - 1));
     COUT << "sorted: ";
-    print(random);
+    print(missing);
+    findCard(missing);
 
-    COUT << "---------------------------------------------------------" << ENDL;
-    COUT << "Fourth Test: Strings" << ENDL;
-    VECT<STR> strings;
-    strings.push_back("Hello");
-    strings.push_back("my");
-    strings.push_back("name");
-    strings.push_back("is");
-    strings.push_back("is Chase");
-    strings.push_back("Chase");
-    strings.push_back("Chase Brown");
-    COUT << "unsorted: ";
-    print(strings);
-    quickSort(strings, 0, static_cast<int>(strings.size() - 1));
-    COUT << "sorted: ";
-    print(strings);
+
+
+    //
+    // COUT << "---------------------------------------------------------" << ENDL;
+    // COUT << "Fourth Test: Strings" << ENDL;
+    // VECT<STR> strings;
+    // strings.push_back("Hello");
+    // strings.push_back("my");
+    // strings.push_back("name");
+    // strings.push_back("is");
+    // strings.push_back("is Chase");
+    // strings.push_back("Chase");
+    // strings.push_back("Chase Brown");
+    // COUT << "unsorted: ";
+    // print(strings);
+    // quickSort(strings, 0, static_cast<int>(strings.size() - 1));
+    // COUT << "sorted: ";
+    // print(strings);
 
     return 0;
 }

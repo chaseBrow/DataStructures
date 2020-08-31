@@ -1,8 +1,8 @@
 //Author: Chase Brown
 //Email: cbrown54@nd.edu
 
-#ifndef QUICK_H
-#define QUICK_H
+#ifndef QUICKCREATIVE_H
+#define QUICKCREATIVE_H
 
 #include <vector>
 #include <iostream>
@@ -50,6 +50,17 @@ void quickSort(VECT<Type> & theVect, int left, int right) {
         int part = partition(theVect, left, right);
         quickSort(theVect, left, part - 1);
         quickSort(theVect, part, right);
+    }
+}
+
+template<class Type>
+void findCard(VECT<Type> & theVect) {
+    for (int i = 0; i < theVect.size()-1; i++) {
+        int diff = theVect[i+1] - theVect[i];
+        if( diff != 1 && diff != 88) {
+            COUT << "The missing card is: " << theVect[i] + 1 << ENDL;
+            return;
+        }
     }
 }
 
