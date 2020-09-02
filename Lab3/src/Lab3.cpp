@@ -1,3 +1,5 @@
+//Author: Chase Brown
+//Email: cbrown54@nd.edu
 #include "../include/Anagram.h"
 
 int main() {
