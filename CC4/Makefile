@@ -15,31 +15,55 @@ OBJ := obj
 EXE := exe
 
 
-# Command: make SLLTest
-SLLTestObjs := $(OBJ)/SLLTest.o
+# Command: make Lab4
+Prob1Objs := $(OBJ)/Prob1.o
 
-SLLTest: $(SLLTestObjs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/SLLTest $(SLLTestObjs)
+Prob1h: $(Prob1Objs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/Prob1 $(Prob1Objs)
+	$(EXE)/./Prob1
 
-$(OBJ)/SLLTest.o: $(SRC)/SLLTest.cpp $(INC)/SLList.h
-	$(PP) $(CXXFLAGS) -c $(SRC)/SLLTest.cpp -o $@
+$(OBJ)/Lab4.o: $(SRC)/Lab4.cpp
+	$(PP) $(CXXFLAGS) -c $(SRC)/Lab4.cpp -o $@
+
+
+# Command: make MergeInt
+Prob1hObjs := $(OBJ)/Prob1h.o
+
+Prob1: $(Prob1hObjs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/Prob1h $(Prob1hObjs)
+	$(EXE)/./Prob1h
+
+$(OBJ)/Prob1h.o: $(SRC)/Prob1.cpp $(INC)/Prob1h.h
+	$(PP) $(CXXFLAGS) -c $(SRC)/Prob1.cpp -o $@
 
 
 
-# Command: make SLLTest2
-SLLTest2Objs := $(OBJ)/SLLTest2.o
 
-SLLTest2: $(SLLTest2Objs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/SLLTest2 $(SLLTest2Objs)
-	$(EXE)/./SLLTest2
-
-$(OBJ)/SLLTest2.o: $(SRC)/SLLTest2.cpp $(INC)/SLList.h
-	$(PP) $(CXXFLAGS) -c $(SRC)/SLLTest2.cpp -o $@
+# # Command: make SLLTest
+# Prob1Objs := $(OBJ)/Prob1.o
+#
+# Prob1: $(Prob1Objs)
+# 	$(PP) $(CXXFLAGS) -o $(EXE)/Prob1 $(Prob1Objs)
+#
+# $(OBJ)/Prob1.o: $(SRC)/Prob1.cpp $(INC)/Prob1.h
+# 	$(PP) $(CXXFLAGS) -c $(SRC)/Prob1.cpp -o $@
+#
+#
+#
+# # Command: make SLLTest2
+# Prob2Objs := $(OBJ)/Prob2.o
+#
+# Prob2: $(Prob2Objs)
+# 	$(PP) $(CXXFLAGS) -o $(EXE)/Prob2 $(Prob2Objs)
+# 	$(EXE)/./Prob2
+#
+# $(OBJ)/Prob2.o: $(SRC)/Prob2.cpp $(INC)/Prob2.h
+# 	$(PP) $(CXXFLAGS) -c $(SRC)/Prob2.cpp -o $@
 
 
 
 # Make all
-all: SLLTest2
+all: Prob2 Prob1
 
 
 # make initialize
