@@ -16,14 +16,16 @@
 #define FIND std::find
 #define DIST std::distance
 
+//this is my class for each node that I add to the stack
 class node {
 public:
-    long unsigned int x;
-    long unsigned int y;
-    node *right;
-    node *down;
+    long unsigned int x; //the x position of the node relative to the land
+    long unsigned int y; //the y position of the node
+    node *right; //pointer to the node on the right
+    node *down; //pointer to the node below
 };
 
+//this the function for printing the map of the land
 void printLand(VECT< VECT<int> > printMe) {
     for(long unsigned int j = 0; j < printMe.size(); j++) {
         for(long unsigned int i = 0; i < printMe.at(j).size(); i++) {
@@ -35,7 +37,7 @@ void printLand(VECT< VECT<int> > printMe) {
     COUT << ENDL;
 }
 
-//this function is for printing out a two dimensional vector
+//this function is for printing out the final results
 void printVect(VECT< VECT<long unsigned int> > printMe) {
     COUT << "[x, y]" << ENDL;
     for(long unsigned int j = 0; j < printMe.size(); j++) {
@@ -49,6 +51,8 @@ void printVect(VECT< VECT<long unsigned int> > printMe) {
     COUT << ENDL;
 }
 
+//this is the parser funciton to connect nodes with their positions relative to the land
+//and print out the unique nodes in the visited list.
 void printAtlantics(VECT<node*> visited, VECT< VECT<int>> land) {
     VECT< VECT<long unsigned int>> output;
     for(unsigned int i = 0; i < visited.size(); i++) {
@@ -64,11 +68,16 @@ void printAtlantics(VECT<node*> visited, VECT< VECT<int>> land) {
     printVect(output);
 }
 
+//this is a function for executing depth first search
+//we take in a stack of pointers to node we need to search
+// then we take in a vector of all previously visited nodes
+// a pointer to current node, and the map of the land.
 void dfs(STC<node*>& stack, VECT<node*>& visited, node* current, VECT< VECT<int>> land) {
-    stack.pop();
-    auto maxX = land[0].size() - 1;
+    stack.pop(); //removing the top node from the stack
+    auto maxX = land[0].size() - 1; //calculating max x and y so we dont try to create a node outside of the land
     auto maxY = land.size() - 1;
 
+    //these two 'if' statements are checking
     if(FIND(visited.begin(), visited.end(), current->down) == visited.end() && current->y < maxY
      && land.at(current->y).at(current->x) <= land.at(current->y + 1).at(current->x)) {
         node* down = new node();
