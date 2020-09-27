@@ -24,8 +24,7 @@ public:
     node *down;
 };
 
-//this function is for printing out a two dimensional vector
-void printVect(VECT< VECT<int> > printMe) {
+void printLand(VECT< VECT<int> > printMe) {
     for(long unsigned int j = 0; j < printMe.size(); j++) {
         for(long unsigned int i = 0; i < printMe.at(j).size(); i++) {
             if(i) COUT << " ";
@@ -36,11 +35,42 @@ void printVect(VECT< VECT<int> > printMe) {
     COUT << ENDL;
 }
 
-void dfs(STC<node*>& stack, VECT<node*>& visited, node* current, long unsigned int maxX, long unsigned int maxY) {
+//this function is for printing out a two dimensional vector
+void printVect(VECT< VECT<long unsigned int> > printMe) {
+    COUT << "[x, y]" << ENDL;
+    for(long unsigned int j = 0; j < printMe.size(); j++) {
+        COUT << "[";
+        for(long unsigned int i = 0; i < printMe.at(j).size(); i++) {
+            if(i) COUT << ", ";
+            COUT << printMe.at(j).at(i);
+        }
+        COUT << "]\n";
+    }
+    COUT << ENDL;
+}
+
+void printAtlantics(VECT<node*> visited, VECT< VECT<int>> land) {
+    VECT< VECT<long unsigned int>> output;
+    for(unsigned int i = 0; i < visited.size(); i++) {
+        if (visited.at(i)->x == land[0].size() - 1 || visited.at(i)->y == land.size() - 1) {
+            VECT<long unsigned int> temp;
+            temp.push_back(visited.at(i)->x);
+            temp.push_back(visited.at(i)->y);
+            if(FIND(output.begin(), output.end(), temp) == output.end()) {
+                output.push_back(temp);
+            }
+        }
+    }
+    printVect(output);
+}
+
+void dfs(STC<node*>& stack, VECT<node*>& visited, node* current, VECT< VECT<int>> land) {
     stack.pop();
-    COUT << current->right << ", " << current->down << ENDL;
-    COUT << current->x << ", " << current->y << ENDL;
-    if(FIND(visited.begin(), visited.end(), current->down) == visited.end() && current->y < maxY) {
+    auto maxX = land[0].size() - 1;
+    auto maxY = land.size() - 1;
+
+    if(FIND(visited.begin(), visited.end(), current->down) == visited.end() && current->y < maxY
+     && land.at(current->y).at(current->x) <= land.at(current->y + 1).at(current->x)) {
         node* down = new node();
         node* right = new node();
         current->down->down = down;
@@ -49,7 +79,8 @@ void dfs(STC<node*>& stack, VECT<node*>& visited, node* current, long unsigned i
         current->down->x = current->x;
         stack.push(current->down);
     }
-    if(FIND(visited.begin(), visited.end(), current->right) == visited.end() && current->x< maxX) {
+    if(FIND(visited.begin(), visited.end(), current->right) == visited.end() && current->x < maxX
+     && land.at(current->y).at(current->x) <= land.at(current->y).at(current->x + 1)) {
         node* down = new node();
         node* right = new node();
         current->right->down = down;
@@ -62,76 +93,50 @@ void dfs(STC<node*>& stack, VECT<node*>& visited, node* current, long unsigned i
     visited.push_back(current);
 }
 
+
 //calculate atlantic --> pacific
 void calculate(VECT< VECT<int> > land) {
-    printVect(land);
+    printLand(land);
     if(land.size() == 0 || land[0].size() == 0){
             COUT << "empty" << ENDL;
     }
-    auto maxX = land[0].size();
-    auto maxY = land.size();
-
-    node* current = new node();
-    node* down = new node();
-    node* right = new node();
-    current->x = 0;
-    current->y = 0;
-    current->right = right;
-    current->down = down;
 
     STC<node*> stack;
     VECT<node*> visited;
 
-    stack.push(current);
-    COUT << current->right << ", " << current->down << ENDL;
-    COUT << current->x << ", " << current->y << ENDL;
+    for(unsigned int y = 0; y < land.size(); y++) {
+        node* current = new node();
+        node* down = new node();
+        node* right = new node();
+        current->x = 0;
+        current->y = y;
+        current->right = right;
+        current->down = down;
+        stack.push(current);
 
-    while(!stack.empty()) {
-        COUT << stack.size() << ENDL;
-        current = stack.top();
-        dfs(stack, visited, current, maxX, maxY);
-    }
-
-
-}
-
-
-
-//this is the comparison function called in the sort method
-
-//function which returns the larger of the two values
-int max(int& val1, int& val2) {
-    return (val1 > val2) ? val1 : val2;
-}
-
-//function which returns the smaller of the two values
-int min(int& val1, int& val2) {
-    return (val1 < val2) ? val1 : val2;
-}
-
-//main merge function which finds overlapping intervals
-void merge(VECT< VECT<int> >& intervals) {
-    COUT << "before: ";
-    printVect(intervals);
-
-    //int for keeping track of the first interval in a comparison
-    int pos = 0;
-
-    for(long unsigned int i = 1; i < intervals.size(); i++) {
-        //checking to see if the end of the first interval overlaps with the start of the following interval
-        if(intervals.at(pos).at(1) >= intervals.at(i).at(0)) {
-            intervals.at(pos).at(1) = max(intervals.at(pos).at(1), intervals.at(i).at(1)); //wrting the highest value to the end of the interval
-            intervals.at(pos).at(0) = min(intervals.at(pos).at(0), intervals.at(i).at(0)); //writing the lowest value to the start of the interval
-            intervals.erase(intervals.begin() + i); //erasing the following interval because we just merged it
-            i--;
+        while(!stack.empty()) {
+            current = stack.top();
+            dfs(stack, visited, current, land);
         }
-        else { //if the intervals do not overlap, we simply iterate to the next comparison
-            pos++;
-            intervals.at(pos) = intervals.at(i);
-        }
+        y++;
     }
-    COUT << "after: ";
-    printVect(intervals);
+    for(unsigned int x = 0; x < land[0].size(); x++) {
+        node* current = new node();
+        node* down = new node();
+        node* right = new node();
+        current->x = x;
+        current->y = 0;
+        current->right = right;
+        current->down = down;
+        stack.push(current);
+
+        while(!stack.empty()) {
+            current = stack.top();
+            dfs(stack, visited, current, land);
+        }
+        x++;
+    }
+    printAtlantics(visited, land);
 }
 
 #endif
