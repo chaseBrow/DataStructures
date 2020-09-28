@@ -77,9 +77,10 @@ void dfs(STC<node*>& stack, VECT<node*>& visited, node* current, VECT< VECT<int>
     auto maxX = land[0].size() - 1; //calculating max x and y so we dont try to create a node outside of the land
     auto maxY = land.size() - 1;
 
-    //these two 'if' statements are checking
+    //these two 'if' statements are checking to see if the node below or to the right is larger, has not been visited, and is not an edge
     if(FIND(visited.begin(), visited.end(), current->down) == visited.end() && current->y < maxY
      && land.at(current->y).at(current->x) <= land.at(current->y + 1).at(current->x)) {
+        //if these nodes meet all the requirement, it will create a new node for that position and add it to the stack
         node* down = new node();
         node* right = new node();
         current->down->down = down;
