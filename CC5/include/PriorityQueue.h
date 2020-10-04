@@ -20,11 +20,19 @@ class PriorityQueue {
 private:
     struct PNode {
         T value;
-        unsigned int priority;
-        PNode * next = new PNode();
-        PNode * prev = new PNode();
+        int priority;
+        PNode* next;
+        PNode* prev;
 
-        PNode(T val, unsigned int pri) : value(val), priority(pri), next(nullptr), prev(nullptr) {}
+        PNode(T val, int pri) : value(val), priority(pri), next(nullptr), prev(nullptr) {}
+        ~PNode() {
+            delete next;
+            delete prev;
+        }
+
+        PNode(const PNode & pn) {}
+        PNode& operator=(PNode const&) {};
+
     };
     PNode *head, *tail;
 public:
@@ -48,15 +56,15 @@ public:
         head = nullptr;
     }
 
-    PriorityQueue(const PriorityQueue<T> & pq) = delete;
-    PriorityQueue& operator=(PriorityQueue const&) = delete;
+    PriorityQueue(const PriorityQueue<T> & pq) {}
+    PriorityQueue& operator=(PriorityQueue const&) {};
 
 
     void insert(T val, unsigned int priority) {
         COUT << this->head << ENDL;
         // COUT << word << " " << priority << ENDL;
         PNode* node = new PNode(val, priority);
-
+        COUT << node << ENDL;
         // if(this->head == nullptr) {
         //     node->prev = nullptr;
         //     this->head = node;
@@ -73,6 +81,12 @@ public:
 
     void remove() {
         COUT << "front";
+    }
+
+    template <class U>
+    friend OST& operator<<(OST& os, const PriorityQueue<U> & pq){
+        pq.display(os);
+        return os;
     }
 
 };
