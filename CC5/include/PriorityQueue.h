@@ -14,38 +14,65 @@
 #define OST std::ostream
 #define STR std::string
 
-#include "PriorityNode.h"
 
+template<class T>
 class PriorityQueue {
-    PNode* head;
+private:
+    struct PNode {
+        T value;
+        unsigned int priority;
+        PNode * next = new PNode();
+        PNode * prev = new PNode();
 
-    class PNode {
-    private:
-        STR value;
-    	unsigned int priority;
-        PNode* next;
-        PNode* prev;
-    public:
-        //default constructor
-        PNode() : value(), priority(), next(), prev() {}
-        //overloaded constructor
-        PNode(STR val, unsigned int pri, PNode* next, PNode* prev) : value(val), priority(pri), next(next), prev(prev)  {}
+        PNode(T val, unsigned int pri) : value(val), priority(pri), next(nullptr), prev(nullptr) {}
     };
+    PNode *head, *tail;
+public:
 
-    void insert() {
+    PriorityQueue() : head(nullptr), tail(nullptr){
+        COUT << "initializing null" << ENDL;
+    }
 
+    PriorityQueue(PNode *hed) : head(hed), tail(nullptr){
+        COUT << "initializing with head" << ENDL;
+    }
+
+    ~PriorityQueue() {
+        PNode *tmp = nullptr;
+        while (head)
+        {
+          tmp = head;
+          head = head->next;
+          delete tmp;
+        }
+        head = nullptr;
+    }
+
+    PriorityQueue(const PriorityQueue<T> & pq) = delete;
+    PriorityQueue& operator=(PriorityQueue const&) = delete;
+
+
+    void insert(T val, unsigned int priority) {
+        COUT << this->head << ENDL;
+        // COUT << word << " " << priority << ENDL;
+        PNode* node = new PNode(val, priority);
+
+        // if(this->head == nullptr) {
+        //     node->prev = nullptr;
+        //     this->head = node;
+        // }
     }
 
     void pop() {
-
+        COUT << "front";
     }
 
-    PNode* front() {
-
+    void front() {
+        COUT << "front";
     }
 
-    void delete() {
-
+    void remove() {
+        COUT << "front";
     }
 
 };
