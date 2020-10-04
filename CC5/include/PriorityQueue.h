@@ -96,30 +96,43 @@ public:
         }
     }
     void print() {
-        PNode* temp = this->head;
-        while(temp->next) {
+        if(this->head) {
+            PNode* temp = this->head;
+            while(temp->next) {
+                COUT << "Priority: " << temp->priority;
+                COUT << " with value: " << temp->value << ENDL;
+                temp = temp->next;
+            }
             COUT << "Priority: " << temp->priority;
             COUT << " with value: " << temp->value << ENDL;
-            temp = temp->next;
         }
-        COUT << "Priority: " << temp->priority;
-        COUT << " with value: " << temp->value << ENDL;
+        else {
+            COUT << "List is empty." << ENDL;
+        }
+
     }
     //For printing the Priority only
     void printPriority() {
-        PNode* temp = this->head;
-        COUT << "The list is: ";
-        while(temp->next) {
-            COUT << temp->priority << "  ";
-            temp = temp->next;
+        if(this->head) {
+            PNode* temp = this->head;
+            COUT << "The list is: ";
+            while(temp->next) {
+                COUT << temp->priority << "  ";
+                temp = temp->next;
+            }
+            COUT << temp->priority << ENDL;
         }
-        COUT << temp->priority << ENDL;
+        else {
+            COUT << "List is empty." << ENDL;
+        }
     }
 
     void pop(T val) {
         PNode* temp = this->head;
         while(temp) {
+            COUT << "in while" << ENDL;
             if(temp->value == val) {
+                COUT << temp->priority << ENDL;
                 temp->prev->next = temp->next;
                 temp->next->prev = temp->prev;
             }
@@ -141,7 +154,22 @@ public:
         PNode* temp = this->head;
         while(temp) {
             if(temp->priority == num) {
-                pop(temp->value);
+                COUT << "Found int: " << temp->priority << ENDL;
+                if(!temp->next && !temp->prev) {
+                    this->head = nullptr;
+                }
+                else if(temp->next && !temp->prev) {
+                    this->head = temp->next;
+                    temp->next->prev = nullptr;
+                }
+                else if(temp->prev && !temp->next) temp->prev->next = nullptr;
+                else {
+                    temp->prev->next = temp->next;
+                    temp->next->prev = temp->prev;
+                }
+            }
+            if(!temp->next) {
+                break;
             }
             temp = temp->next;
         }
