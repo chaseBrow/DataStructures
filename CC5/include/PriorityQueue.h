@@ -61,43 +61,53 @@ public:
 
 
     void insert(T val, unsigned int priority) {
+
         PNode* node = new PNode(val, priority);
         if(this->head == nullptr) {
             COUT << "setting head" << ENDL;
-            node->prev = nullptr;
+            COUT << node << ENDL;
+            // node->prev = nullptr;
             this->head = node;
         }
         else {
             PNode* temp = this->head;
+            int i = 0;
             while(node->priority >= temp->priority && temp->next) {
                 COUT << "while" << ENDL;
                 temp = temp->next;
+                i++;
             }
             if(node->priority >= temp->priority) {
                 COUT << "if" << ENDL;
                 node->prev = temp;
                 temp->next = node;
             }
+            else if(i > 0) {
+                COUT << "else if" << ENDL;
+                node->next = temp;
+                node->prev = temp->prev;
+                temp->prev->next = node;
+                temp->prev = node;
+            }
             else {
                 COUT << "else" << ENDL;
                 node->next = temp;
-                this->head = node;
                 temp->prev = node;
             }
         }
 
-        // if(this->head->prev) {
-        //     this->head = this->head->prev;
-        // }
+        if(this->head->prev) {
+            COUT << "reset head" << ENDL;
+            this->head = this->head->prev;
+        }
     }
     void print() {
-        // PNode* temp = this->head;
-        // // COUT << temp->prev->priority << ENDL;
-        // COUT << temp->priority << ENDL;
-        // while(temp->next) {
-        //     COUT << temp->priority << ENDL;
-        //     temp = temp->next;
-        // }
+        PNode* temp = this->head;
+        while(temp->next) {
+            COUT << temp->priority << ENDL;
+            temp = temp->next;
+        }
+        COUT << temp->priority << ENDL;
     }
 
     void pop() {
