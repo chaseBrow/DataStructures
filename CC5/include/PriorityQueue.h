@@ -5,6 +5,7 @@
 #define PRIORITY_H
 
 #include <iostream>
+#include <cstdlib>
 #include <vector>
 #include <bits/stdc++.h>
 #include <string>
@@ -13,6 +14,7 @@
 #define ENDL std::endl
 #define OST std::ostream
 #define STR std::string
+#define CIN std::cin
 
 
 template<class T>
@@ -64,62 +66,85 @@ public:
 
         PNode* node = new PNode(val, priority);
         if(this->head == nullptr) {
-            COUT << "setting head" << ENDL;
-            COUT << node << ENDL;
-            // node->prev = nullptr;
             this->head = node;
         }
         else {
             PNode* temp = this->head;
             int i = 0;
             while(node->priority >= temp->priority && temp->next) {
-                COUT << "while" << ENDL;
                 temp = temp->next;
                 i++;
             }
             if(node->priority >= temp->priority) {
-                COUT << "if" << ENDL;
                 node->prev = temp;
                 temp->next = node;
             }
             else if(i > 0) {
-                COUT << "else if" << ENDL;
                 node->next = temp;
                 node->prev = temp->prev;
                 temp->prev->next = node;
                 temp->prev = node;
             }
             else {
-                COUT << "else" << ENDL;
                 node->next = temp;
                 temp->prev = node;
             }
         }
 
         if(this->head->prev) {
-            COUT << "reset head" << ENDL;
             this->head = this->head->prev;
         }
     }
     void print() {
         PNode* temp = this->head;
         while(temp->next) {
-            COUT << temp->priority << ENDL;
+            COUT << "Priority: " << temp->priority;
+            COUT << " with value: " << temp->value << ENDL;
+            temp = temp->next;
+        }
+        COUT << "Priority: " << temp->priority;
+        COUT << " with value: " << temp->value << ENDL;
+    }
+    //For printing the Priority only
+    void printPriority() {
+        PNode* temp = this->head;
+        COUT << "The list is: ";
+        while(temp->next) {
+            COUT << temp->priority << "  ";
             temp = temp->next;
         }
         COUT << temp->priority << ENDL;
     }
 
-    void pop() {
-        COUT << "front";
+    void pop(T val) {
+        PNode* temp = this->head;
+        while(temp) {
+            if(temp->value == val) {
+                temp->prev->next = temp->next;
+                temp->next->prev = temp->prev;
+            }
+            temp = temp->next;
+        }
     }
 
     void front() {
         COUT << "front";
     }
+    bool isEmpty() {
+        if(this->head == nullptr) {
+            return true;
+        }
+        else return false;
+    }
 
-    void remove() {
-        COUT << "front";
+    void removeInt(int num) {
+        PNode* temp = this->head;
+        while(temp) {
+            if(temp->priority == num) {
+                pop(temp->value);
+            }
+            temp = temp->next;
+        }
     }
 
     template <class U>

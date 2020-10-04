@@ -14,7 +14,6 @@ SRC := src
 OBJ := obj
 EXE := exe
 
-
 # Command: make PQTest
 PQTestObjs := $(OBJ)/PQTest.o
 
@@ -35,30 +34,19 @@ $(OBJ)/PriorityQueue.o: $(SRC)/PQTest.cpp $(INC)/PriorityQueue.h
 	$(PP) $(CXXFLAGS) -c $(SRC)/PQTest.cpp -o $@
 
 
+	# Command: make SorDLLTest
+SorDLLTestObjs := $(OBJ)/SorDLLTest.o
 
-# Command: make Prob2
-Prob2Objs := $(OBJ)/Prob2.o
+SorDLLTest: $(SorDLLTestObjs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/SorDLLTest $(SorDLLTestObjs)
 
-Prob2h: $(Prob2Objs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/Prob2 $(Prob2Objs)
-	$(EXE)/./Prob2
-
-$(OBJ)/Prob2.o: $(SRC)/Prob2.cpp
-	$(PP) $(CXXFLAGS) -c $(SRC)/Prob2.cpp -o $@
-
-Prob2hObjs := $(OBJ)/Prob2h.o
-
-Prob2: $(Prob2hObjs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/Prob2h $(Prob2hObjs)
-	$(EXE)/./Prob2h
-
-$(OBJ)/Prob2h.o: $(SRC)/Prob2.cpp $(INC)/Prob2h.h
-	$(PP) $(CXXFLAGS) -c $(SRC)/Prob2.cpp -o $@
+$(OBJ)/SorDLLTest.o: $(SRC)/SorDLLTest.cpp $(INC)/PriorityQueue.h
+	$(PP) $(CXXFLAGS) -c $(SRC)/SorDLLTest.cpp -o $@
 
 
 
 # Make all
-all: Prob2 PQTest
+all: SorDLLTest PQTest
 
 
 # make initialize
