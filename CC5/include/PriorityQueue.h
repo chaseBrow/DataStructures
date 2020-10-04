@@ -34,14 +34,14 @@ private:
         PNode& operator=(PNode const&) {};
 
     };
-    PNode *head, *tail;
+    PNode *head;
 public:
 
-    PriorityQueue() : head(nullptr), tail(nullptr){
+    PriorityQueue() : head(nullptr){
         COUT << "initializing null" << ENDL;
     }
 
-    PriorityQueue(PNode *hed) : head(hed), tail(nullptr){
+    PriorityQueue(PNode *hed) : head(hed){
         COUT << "initializing with head" << ENDL;
     }
 
@@ -61,13 +61,42 @@ public:
 
 
     void insert(T val, unsigned int priority) {
-        COUT << this->head << ENDL;
-        // COUT << word << " " << priority << ENDL;
         PNode* node = new PNode(val, priority);
-        COUT << node << ENDL;
-        // if(this->head == nullptr) {
-        //     node->prev = nullptr;
-        //     this->head = node;
+        if(this->head == nullptr) {
+            COUT << "setting head" << ENDL;
+            node->prev = nullptr;
+            this->head = node;
+        }
+        else {
+            PNode* temp = this->head;
+            while(node->priority >= temp->priority && temp->next) {
+                COUT << "while" << ENDL;
+                temp = temp->next;
+            }
+            if(node->priority >= temp->priority) {
+                COUT << "if" << ENDL;
+                node->prev = temp;
+                temp->next = node;
+            }
+            else {
+                COUT << "else" << ENDL;
+                node->next = temp;
+                this->head = node;
+                temp->prev = node;
+            }
+        }
+
+        // if(this->head->prev) {
+        //     this->head = this->head->prev;
+        // }
+    }
+    void print() {
+        // PNode* temp = this->head;
+        // // COUT << temp->prev->priority << ENDL;
+        // COUT << temp->priority << ENDL;
+        // while(temp->next) {
+        //     COUT << temp->priority << ENDL;
+        //     temp = temp->next;
         // }
     }
 
