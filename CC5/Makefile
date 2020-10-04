@@ -44,9 +44,29 @@ $(OBJ)/SorDLLTest.o: $(SRC)/SorDLLTest.cpp $(INC)/PriorityQueue.h
 	$(PP) $(CXXFLAGS) -c $(SRC)/SorDLLTest.cpp -o $@
 
 
+# Command: make Creative
+CreativeObjs := $(OBJ)/Creative.o
+
+PQCreative: $(CreativeObjs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/Creative $(CreativeObjs)
+	$(EXE)/./Creative
+
+$(OBJ)/Creative.o: $(SRC)/Creative.cpp
+	$(PP) $(CXXFLAGS) -c $(SRC)/Creative.cpp -o $@
+
+PQCreativeObjs := $(OBJ)/PQCreative.o
+
+Creative: $(PQCreativeObjs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/PQCreative $(PQCreativeObjs)
+	$(EXE)/./PQCreative
+
+$(OBJ)/PQCreative.o: $(SRC)/Creative.cpp $(INC)/PQCreative.h
+	$(PP) $(CXXFLAGS) -c $(SRC)/Creative.cpp -o $@
+
+
 
 # Make all
-all: SorDLLTest PQTest
+all: SorDLLTest PQTest Creative
 
 
 # make initialize

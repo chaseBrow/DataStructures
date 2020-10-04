@@ -1,8 +1,8 @@
 //Author: Chase Brown
 //Email: cbrown54@nd.edu
 
-#ifndef PRIORITY_H
-#define PRIORITY_H
+#ifndef PRIORITYQUEUE_H
+#define PRIORITYQUEUE_H
 
 #include <iostream>
 #include <cstdlib>
