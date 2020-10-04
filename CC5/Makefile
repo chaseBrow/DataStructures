@@ -1,117 +1,71 @@
-# Author: Matthew Morrison
-# E-mail: matt.morrison@nd.edu
-#
-# This is the Makefile for the CSE 20312 course - Lecture 18
+# Author: Chase Brown
+# This is the Makefile for the CSE 20312 - CC4
 
 # G++ is for the GCC compiler for C++
 PP := g++
 
-# CFLAGS are the compiler flages for when we compile C code in this course
+# CXXFLAGS are the compiler flages for when we compile C++ code in this course
 FLAGS := -O0 -g -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror
-CFLAGS := -std=c11 $(FLAGS)
 CXXFLAGS := -m64 -std=c++11 -Weffc++ $(FLAGS)
 
 # Variables for Folders
 INC := include
 SRC := src
-EXE := exe
 OBJ := obj
+EXE := exe
 
 
-# Command: make wrapper
-wrapperQueueObjs :=  $(OBJ)/wrapperQueue.o
+# Command: make PQTest
+PQTestObjs := $(OBJ)/PQTest.o
 
-wrapperQueue: $(wrapperQueueObjs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/wrapperQueue $(wrapperQueueObjs)
-	$(EXE)/./wrapperQueue
+PriorityQueue: $(PQTestObjs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/PQTest $(PQTestObjs)
+	$(EXE)/./PQTest
 
-$(OBJ)/wrapperQueue.o: $(SRC)/wrapperQueue.cpp $(INC)/queue.h
-	$(PP) $(CXXFLAGS) -c $(SRC)/wrapperQueue.cpp -o $@
+$(OBJ)/PQTest.o: $(SRC)/PQTest.cpp
+	$(PP) $(CXXFLAGS) -c $(SRC)/PQTest.cpp -o $@
 
+PriorityQueueObjs := $(OBJ)/PriorityQueue.o
 
+PQTest: $(PriorityQueueObjs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/PriorityQueue $(PriorityQueueObjs)
+	$(EXE)/./PriorityQueue
 
-# Command: make wrapperStack
-wrapperStackObjs :=  $(OBJ)/wrapperStack.o
-
-wrapperStack: $(wrapperStackObjs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/wrapperStack $(wrapperStackObjs)
-	$(EXE)/./wrapperStack
-
-$(OBJ)/wrapperStack.o: $(SRC)/wrapperStack.cpp $(INC)/stack.h
-	$(PP) $(CXXFLAGS) -c $(SRC)/wrapperStack.cpp -o $@
-
-
-
-# Command: make wrapperStack
-stackTestObjs :=  $(OBJ)/stackTest.o
-
-stackTest: $(stackTestObjs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/stackTest $(stackTestObjs)
-	$(EXE)/./stackTest
-
-$(OBJ)/stackTest.o: $(SRC)/stackTest.cpp $(INC)/stack.h
-	$(PP) $(CXXFLAGS) -c $(SRC)/stackTest.cpp -o $@
-
-
-# Command: make shortestPath1
-shortestPath1Objs :=  $(OBJ)/shortestPath1.o
-
-shortestPath1: $(shortestPath1Objs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/shortestPath1 $(shortestPath1Objs)
-	$(EXE)/./shortestPath1
-
-$(OBJ)/shortestPath1.o: $(SRC)/shortestPath1.cpp $(INC)/queue.h
-	$(PP) $(CXXFLAGS) -c $(SRC)/shortestPath1.cpp -o $@
+$(OBJ)/PriorityQueue.o: $(SRC)/PQTest.cpp $(INC)/PriorityQueue.h
+	$(PP) $(CXXFLAGS) -c $(SRC)/PQTest.cpp -o $@
 
 
 
-# Command: make shortestPath2
-shortestPath2Objs :=  $(OBJ)/shortestPath2.o
+# Command: make Prob2
+Prob2Objs := $(OBJ)/Prob2.o
 
-shortestPath2: $(shortestPath2Objs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/shortestPath2 $(shortestPath2Objs)
-	$(EXE)/./shortestPath2
+Prob2h: $(Prob2Objs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/Prob2 $(Prob2Objs)
+	$(EXE)/./Prob2
 
-$(OBJ)/shortestPath2.o: $(SRC)/shortestPath2.cpp $(INC)/queue.h
-	$(PP) $(CXXFLAGS) -c $(SRC)/shortestPath2.cpp -o $@
+$(OBJ)/Prob2.o: $(SRC)/Prob2.cpp
+	$(PP) $(CXXFLAGS) -c $(SRC)/Prob2.cpp -o $@
 
+Prob2hObjs := $(OBJ)/Prob2h.o
 
+Prob2: $(Prob2hObjs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/Prob2h $(Prob2hObjs)
+	$(EXE)/./Prob2h
 
-# Command: make shortestPath3
-shortestPath3Objs :=  $(OBJ)/shortestPath3.o
-
-shortestPath3: $(shortestPath3Objs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/shortestPath3 $(shortestPath3Objs)
-	$(EXE)/./shortestPath3
-
-$(OBJ)/shortestPath3.o: $(SRC)/shortestPath3.cpp $(INC)/queue.h
-	$(PP) $(CXXFLAGS) -c $(SRC)/shortestPath3.cpp -o $@
+$(OBJ)/Prob2h.o: $(SRC)/Prob2.cpp $(INC)/Prob2h.h
+	$(PP) $(CXXFLAGS) -c $(SRC)/Prob2.cpp -o $@
 
 
 
-
-# Command: make shortestPath
-shortestPathObjs :=  $(OBJ)/shortestPath.o
-
-shortestPath: $(shortestPathObjs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/shortestPath $(shortestPathObjs)
-	$(EXE)/./shortestPath
-
-$(OBJ)/shortestPath.o: $(SRC)/shortestPath.cpp $(INC)/queue.h
-	$(PP) $(CXXFLAGS) -c $(SRC)/shortestPath.cpp -o $@
-
-
+# Make all
+all: Prob2 PQTest
 
 
 # make initialize
 # Will be called by grader to initialize your objects and executables folders
 
 initialize:
-	mkdir $(OBJ) $(EXE)
-
-
-# Make all
-all: wrapperQueue wrapperStack
+	mkdir objects executables
 
 # Make clean
 clean :
