@@ -3,19 +3,14 @@
 * Author: Matthew Morrison
 * Email: matt.morrison@nd.edu
 *
-* This file contains the main driver function
-* for a Doubly Linked List test
+* Editor: Chase Brown
+* Email: cbrown54@nd.edu
+* This file is an edited version of Dr. Morrisons test script
+* for a Doubly Linked List
 **********************************************/
 
 #include "../include/PriorityQueue.h"
 
-/********************************************
-* Function Name  : getAndCheckInput
-* Pre-conditions : char* argv
-* Post-conditions: int
-*
-* checks if the input is a valid integer
-********************************************/
 int getAndCheckInput(char* argv){
 
 	int iter;
@@ -38,14 +33,7 @@ int getAndCheckInput(char* argv){
 	return atoi(argv);
 }
 
-/********************************************
-* Function Name  : main
-* Pre-conditions : int argc, char** argv
-* Post-conditions: int
-*
-* This is the main driver function for the program
-* For this lecture, we assume
-********************************************/
+
 int main (int argc, char** argv)
 {
 
@@ -57,16 +45,16 @@ int main (int argc, char** argv)
 	}
 
 	/* Initialize Number of Inputs to Linked List */
-	int listLen = argc - 1, iter;
+	int listLen = argc - 1;
     int num;
 
 	/* Call default constructor for Linked List */
 	PriorityQueue<int> theQue;
 
 	/* Start at the first int, and go until the end of the command line */
-	for(iter = 1; iter <= listLen; ++iter){
+	for(int i = 1; i <= listLen; ++i){
 
-		int tempInt = getAndCheckInput(argv[iter]); // atoi(argv[iter]);
+		int tempInt = getAndCheckInput(argv[i]); // atoi(argv[iter]);
 		COUT << "Inserting " << tempInt << " into Linked List" << ENDL;
 		theQue.insert(0, tempInt);
 		COUT << "theQue: ";

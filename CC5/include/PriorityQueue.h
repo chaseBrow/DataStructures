@@ -20,6 +20,7 @@
 template<class T>
 class PriorityQueue {
 private:
+    //this is my struct for each node of the DLList/Priority Queue
     struct PNode {
         T value;
         int priority;
@@ -27,6 +28,9 @@ private:
         PNode* prev;
 
         PNode(T val, int pri) : value(val), priority(pri), next(nullptr), prev(nullptr) {}
+
+        //here we have the destructor, copy constructor, and copy assignment to
+        //make sure we pass the rule of three warning
         ~PNode() {
             delete next;
             delete prev;
@@ -38,15 +42,17 @@ private:
     };
     PNode *head;
 public:
-
+    //constructor
     PriorityQueue() : head(nullptr){
         COUT << "initializing null" << ENDL;
     }
-
+    //overloaded constructor
     PriorityQueue(PNode *hed) : head(hed){
         COUT << "initializing with head" << ENDL;
     }
 
+    //here we have the destructor, copy constructor, and copy assignment to
+    //make sure we pass the rule of three warning
     ~PriorityQueue() {
         PNode *tmp = nullptr;
         while (head)
@@ -61,7 +67,8 @@ public:
     PriorityQueue(const PriorityQueue<T> & pq) {}
     PriorityQueue& operator=(PriorityQueue const&) {};
 
-
+    //function for inserting a new item into the priority queue/DLList
+    //this function will also sort the DLList
     void insert(T val, unsigned int priority) {
 
         PNode* node = new PNode(val, priority);
@@ -95,6 +102,7 @@ public:
             this->head = this->head->prev;
         }
     }
+    //function for printing both the value and priority
     void print() {
         if(this->head) {
             PNode* temp = this->head;
@@ -127,22 +135,37 @@ public:
         }
     }
 
+    //this is the remove function for a node based on the value
     void pop(T val) {
         PNode* temp = this->head;
+        bool found = false;
         while(temp) {
-            COUT << "in while" << ENDL;
             if(temp->value == val) {
-                COUT << temp->priority << ENDL;
-                temp->prev->next = temp->next;
-                temp->next->prev = temp->prev;
+                found = true;
+                if(!temp->next && !temp->prev) {
+                    this->head = nullptr;
+                }
+                else if(temp->next && !temp->prev) {
+                    this->head = temp->next;
+                    temp->next->prev = nullptr;
+                }
+                else if(temp->prev && !temp->next) temp->prev->next = nullptr;
+                else {
+                    temp->prev->next = temp->next;
+                    temp->next->prev = temp->prev;
+                }
+            }
+            if(!temp->next) {
+                break;
             }
             temp = temp->next;
         }
+        if(!found) {
+            COUT << "Value " << val << " does not exist in the list" << ENDL;
+        }
     }
 
-    void front() {
-        COUT << "front";
-    }
+    //to check if the PQue/DLList is empty
     bool isEmpty() {
         if(this->head == nullptr) {
             return true;
@@ -150,10 +173,13 @@ public:
         else return false;
     }
 
+    //this is the function for removing a node based on the Priority
     void removeInt(int num) {
         PNode* temp = this->head;
+        bool found = false;
         while(temp) {
             if(temp->priority == num) {
+                found = true;
                 COUT << "Found int: " << temp->priority << ENDL;
                 if(!temp->next && !temp->prev) {
                     this->head = nullptr;
@@ -172,6 +198,9 @@ public:
                 break;
             }
             temp = temp->next;
+        }
+        if(!found) {
+            COUT << "Integer " << num << " does not exist in the list" << ENDL;
         }
     }
 
